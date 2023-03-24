@@ -57,6 +57,10 @@ const Board = () => {
         })();
     }, []);
 
+    useEffect(()=>{
+        console.log(cards)
+    }, [cards])
+
     return (
         <BoardContainer>
             <Lista titulo={"Novo"}>
@@ -66,7 +70,7 @@ const Board = () => {
             </Lista>
             <Lista titulo={"To Do"}>
                 {
-                    cards.filter(c => c.lista === 'ToDo').map(c =>
+                    cards.filter(c => c.lista === 'ToDo').map(c =/static/js/bundle.js>
                         <Card
                             key={c.id}
                             titulo={c.titulo}

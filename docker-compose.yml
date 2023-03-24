@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  web:
+    build: FRONT
+    ports:
+      - 3000:3000
+    restart: always
+
+  server:
+    build: BACK
+    ports:
+      - 5000:5000
+    depends_on:
+      - "db"
+    # restart: always
+    environment:
+      - DB_NAME=desafio_kanbam_dev
+      - DB_USER=kanbam
+      - DB_PASSWORD=someStrongPass
+      - DB_DIALECT=postgres
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_LOGS=true
+      - PASSWORD=lets@123
+      - USERNAME=letscode
+  
+  db:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_PASSWORD=someStrongPass
+      - POSTGRES_USER=kanbam
+    ports:
+      - 5432:5432

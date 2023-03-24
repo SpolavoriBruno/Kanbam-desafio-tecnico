@@ -36,9 +36,9 @@ const useCardService = () => {
 
         return await fetch(CARD_URL, { headers: authHeader })
             .then(res => {
-                if (res.status === 200) return res.json();
+                if (res.status >= 200 && res.status <= 400) return res.json();
                 else if (res.status === 401) getToken();
-                else throw new Error('unexpected status code');
+                // else throw new Error(`unexpected status code ${res.status}`);
                 return getCards();
             })
             .catch(console.error);
@@ -55,7 +55,7 @@ const useCardService = () => {
             .then(res => {
                 if (res.status === 200) return res.json();
                 else if (res.status === 401) getToken();
-                else throw new Error('unexpected status code');
+                else throw new Error(`unexpected status code ${res.status}`);
                 return updateCard(card);
             })
             .catch(console.error);
@@ -72,7 +72,7 @@ const useCardService = () => {
             .then(res => {
                 if (res.status === 201) return res.json();
                 else if (res.status === 401) getToken();
-                else throw new Error('unexpected status code');
+                else throw new Error(`unexpected status code ${res.status}`);
                 return updateCard(card);
             })
             .catch(console.error);
@@ -88,7 +88,7 @@ const useCardService = () => {
             .then(res => {
                 if (res.status === 200) return res.json();
                 else if (res.status === 401) getToken();
-                else throw new Error('unexpected status code');
+                else throw new Error(`unexpected status code ${res.status}`);
                 return removeCard(id);
             })
             .catch(console.error);
